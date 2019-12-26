@@ -1,0 +1,71 @@
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  LogRetentionDays:
+    Type: Number
+    Default: 7
+
+  QualifierName:
+    Type: String
+    Default: current
+
+Resources:
+  NotificationTopic:
+    Type: AWS::SNS::Topic
+
+  ErrorTopic:
+    Type: AWS::SNS::Topic
+
+  PublisherFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: python3.7
+      Timeout: 120
+      MemorySize: 256
+      AutoPublishAlias: !Ref QualifierName
+      CodeUri: src
+      Handler: index.handler
+      Policies:
+        - Version: 2012-10-17
+          Statement:
+            - Effect: Allow
+              Action: "ce:GetCostAndUsage"
+              Resource: "*"
+            - Effect: Allow
+              Action: "sns:Publish"
+              Resource:
+                - !Ref NotificationTopic
+                - !Ref ErrorTopic
+      Events:
+        NineOclock:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 0 * * ? *)
+
+  PublisherLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${PublisherFunction}
+      RetentionInDays: !Ref LogRetentionDays
+
+  DestinationConfig:
+    Type: AWS::Lambda::EventInvokeConfig
+    Properties:
+      FunctionName: !Ref PublisherFunction
+      Qualifier: !Ref QualifierName
+      DestinationConfig:
+        OnFailure:
+          Destination: !Ref ErrorTopic
+        OnSuccess:
+          Destination: !Ref NotificationTopic
+
+Outputs:
+  ErrorTopicArn:
+    Value: !Ref ErrorTopic
+    Export:
+      Name: !Sub ${AWS::StackName}-ErrorTopicArn
+
+  NotificationTopicArn:
+    Value: !Ref NotificationTopic
+    Export:
+      Name: !Sub ${AWS::StackName}-NotificationTopicArn
