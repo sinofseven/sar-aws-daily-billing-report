@@ -1,5 +1,4 @@
 SHELL = /usr/bin/env bash -xeuo pipefail
-stack_name=''
 
 isort:
 	pipenv run isort -rc \
@@ -27,8 +26,8 @@ package:
 deploy: package
 	pipenv run aws cloudformation deploy \
 		--template-file dist/template.yml \
-		--stack-name $(stack_name) \
-		--role-arn $(AWS_CFN_DEPLOY_ROLE_ARN) \
+		--stack-name $$STACK_NAME \
+		--capabilities CAPABILITY_IAM \
 		--no-fail-on-empty-changeset
 
 test-unit:

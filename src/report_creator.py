@@ -61,7 +61,7 @@ def create_option(date_range: Tuple[date, date]) -> dict:
 
 
 def execute_get_cost(option: dict, ce: BaseClient) -> dict:
-    resp = ce.get_const_and_usage(**option)
+    resp = ce.get_cost_and_usage(**option)
     return {
         "start": resp["ResultsByTime"][0]["TimePeriod"]["Start"],
         "end": resp["ResultsByTime"][0]["TimePeriod"]["End"],
