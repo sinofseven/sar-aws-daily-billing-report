@@ -132,7 +132,7 @@ SNS Topicは2つ使用します。
 ```
 
 Message Structure
-- (dict) --
+- (dict) --  
   - **responsePayload** (dict) --  
     SNS TopicにPublishされた内容
     - **daily** (dict) --  
@@ -143,17 +143,17 @@ Message Structure
         利用費の情報
         - **start** (string) --  
           利用費を集計する期間の開始の日付(集計の際この日付を含める)。例、```2019-01-02```。
-        - **end** (string) --
+        - **end** (string) --  
           利用費を集計する期間の終了の日付(集計の際この日付を含めない)。例、```2019-01-03```。
-        - **billing** (string) --
+        - **billing** (string) --  
           利用費。floatの数値を文字列として返す。例、```9.6199614962```。
-        - **unit** (string) --
+        - **unit** (string) --  
           利用費の単位。例、```USD```。
-      - **error** (dict) --
+      - **error** (dict) --  
         利用費取得時に発生したエラーの情報。
-        - **message** (string) --
+        - **message** (string) --  
           エラーメッセージ。
-        - **stacktrace** (string) --
+        - **stacktrace** (string) --  
           スタックトレース。
     - **monthly** (dict) --  
       今月分(昨日まで)の利用費の情報
@@ -163,17 +163,17 @@ Message Structure
         利用費の情報
         - **start** (string) --  
           利用費を集計する期間の開始の日付(集計の際この日付を含める)。例、```2019-01-02```。
-        - **end** (string) --
+        - **end** (string) --  
           利用費を集計する期間の終了の日付(集計の際この日付を含めない)。例、```2019-01-03```。
-        - **billing** (string) --
+        - **billing** (string) --  
           利用費。floatの数値を文字列として返す。例、```9.6199614962```。
-        - **unit** (string) --
+        - **unit** (string) --  
           利用費の単位。例、```USD```。
-      - **error** (dict) --
+      - **error** (dict) --  
         利用費取得時に発生したエラーの情報。
-        - **message** (string) --
+        - **message** (string) --  
           エラーメッセージ。
-        - **stacktrace** (string) --
+        - **stacktrace** (string) --  
           スタックトレース。
     - **premonth** (dict) --  
       先月分の利用費の情報
@@ -183,15 +183,15 @@ Message Structure
         利用費の情報
         - **start** (string) --  
           利用費を集計する期間の開始の日付(集計の際この日付を含める)。例、```2019-01-02```。
-        - **end** (string) --
+        - **end** (string) --  
           利用費を集計する期間の終了の日付(集計の際この日付を含めない)。例、```2019-01-03```。
-        - **billing** (string) --
+        - **billing** (string) --  
           利用費。floatの数値を文字列として返す。例、```9.6199614962```。
-        - **unit** (string) --
+        - **unit** (string) --  
           利用費の単位。例、```USD```。
-      - **error** (dict) --
+      - **error** (dict) --  
         利用費取得時に発生したエラーの情報。
-        - **message** (string) --
+        - **message** (string) --  
           エラーメッセージ。
-        - **stacktrace** (string) --
+        - **stacktrace** (string) --  
           スタックトレース。
